@@ -18,5 +18,5 @@ for i,row in df.iterrows():
 	print('Recursive' ,res, exec_time)
 	res, exec_time = topdown_ed.run_topdown_ed(x,y)
 	print('Top Down' ,res, exec_time)
-	res, exec_time , _= botomup_ed.run_bottomup_ed(x,y)
+	res, exec_time , _, _= botomup_ed.run_bottomup_ed(x,y)
 	print('Bottom up' , res, exec_time)
