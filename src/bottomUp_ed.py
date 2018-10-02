@@ -19,17 +19,38 @@ def get_dir_str(i):
 		return u"\u2190"
 
 def print_actions(x, y, table):
-	print ("     " + " ".join(y))
+	line = "       " + "  ".join(y)
+	print (line)
+	tmp = '-'
+	for k in range(len(line)):
+		tmp +='-'
+	# print (tmp)
+
 	for i in range(0,table.shape[0]):
 		if i > 0:
 			res = x[i-1] + " "
 		else :
 			res = "  "
 		for j in range(0,table.shape[1]):
-			res += " " + get_dir_str(table[i][j])
+			res += "  " + get_dir_str(table[i][j])
 		print (res)
+		# print(tmp)
 
+def print_cost(x,y,table_cost):
+	line = "       " + "  ".join(y)
+	print(line)
+	tmp = '-'
+	for k in range(len(line)):
+		tmp += '-'
 
+	for i in range(0, table_cost.shape[0]):
+		if i > 0:
+			res = x[i - 1] + " "
+		else:
+			res = "  "
+		for j in range(0, table_cost.shape[1]):
+			res += "  " + str(int(table_cost[i][j]))
+		print(res)
 
 def ED_BottomUp(x, y):
 	global UP, LF, DG
@@ -72,15 +93,15 @@ def ED_BottomUp(x, y):
 
 	# Return the result
 	res = table_cost[x_len, y_len]
-	return  res, table_action
+	return  res, table_action, table_cost
 
 
 def run_bottomup_ed(x, y):
 	t0 = time.time()
-	res, table_action = ED_BottomUp(x, y)
+	res, table_action, table_cost = ED_BottomUp(x, y)
 	t1 = time.time()
 	exec_time = (t1 - t0)
-	return res , exec_time , table_action
+	return res , exec_time , table_action, table_cost
 
 
 def test( x = None , y = None):
@@ -93,23 +114,24 @@ def test( x = None , y = None):
 	print('Input strings are :')
 	print(x)
 	print(y)
-	res, exec_time, table_action = run_bottomup_ed(x, y)
+	res, exec_time, table_action, table_cost = run_bottomup_ed(x, y)
 	print('Edit distance between the strings', res)
 	print('Time taken {0:.10f} seconds'.format(exec_time))
 	# print_actions(x, y, table_action)
 
 def test_with_disp( x = None , y = None):
 	if x is None or y is None:
-		# x = "GCTATGCCACGC"
-		# y = "GCTATGCCACGC"
-		x = "exponential"
-		y = "polynomial"
+		x = "GCGTATGCGGC"
+		y = "GCTATGCGGCT"
+		# x = "exponential"
+		# y = "polynomial"
 	print('Input strings are :')
 	print(x)
 	print(y)
-	res, exec_time, table_action = run_bottomup_ed(x, y)
+	res, exec_time, table_action, table_cost = run_bottomup_ed(x, y)
 	print('Edit distance between the strings', res)
 	print('Time taken {0:.10f} seconds'.format(exec_time))
 	print_actions(x, y, table_action)
+	print_cost(x,y, table_cost)
 
-# test()
+test_with_disp()
