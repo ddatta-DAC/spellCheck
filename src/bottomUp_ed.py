@@ -178,7 +178,7 @@ parser.add_argument('--test', type=int, help='to run test, enter --test 1')
 args = vars(parser.parse_args())
 
 if args['test'] == 1:
-    test_with_disp();
+    test_with_disp()
 elif args['x'] != None and args['y'] != None:
     x = args['x']
     y = args['y']

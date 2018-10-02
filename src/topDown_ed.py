@@ -2,7 +2,7 @@ import time
 
 
 def ED_TopDown(x, y, memoized_val=None):
-    # Initialize the data structure to hold resulstalready computed
+    # Initialize the data structure to hold resulst already computed
     if memoized_val is None:
         memoized_val = {}
 
